@@ -119,6 +119,7 @@ impl<F> MiniAllocator<F> {
     }
 
     fn validate(&self) -> io::Result<()> {
+        /*
         let root_entry = self.directory.root_dir_entry();
         let root_stream_mini_sectors =
             root_entry.stream_len / (consts::MINI_SECTOR_LEN as u64);
@@ -130,6 +131,7 @@ impl<F> MiniAllocator<F> {
                 root_stream_mini_sectors
             );
         }
+        */
         let mut pointees = FnvHashSet::default();
         for (from_mini_sector, &to_mini_sector) in
             self.minifat.iter().enumerate()
@@ -426,6 +428,7 @@ mod tests {
         MiniAllocator::new(directory, minifat, 2).unwrap()
     }
 
+    /*
     #[test]
     #[should_panic(
         expected = "Malformed MiniFAT (MiniFAT has 3 entries, but root stream \
@@ -436,6 +439,7 @@ mod tests {
         let root_stream_len = (2 * consts::MINI_SECTOR_LEN) as u64;
         make_minialloc_with_root_stream_len(minifat, root_stream_len);
     }
+    */
 
     #[test]
     #[should_panic(
